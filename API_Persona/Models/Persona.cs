@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_Persona.Models
 {
+    //Clase persona con sus sets y gets
+    //Contiene los requerimientos necesarios
     public class Persona
     {
         [Key]
@@ -20,7 +22,7 @@ namespace API_Persona.Models
         public DateTime FechaNacimiento { get; set; }
 
         [Required(ErrorMessage = "El email es obligatorio")]
-        [EmailAddress(ErrorMessage = "El formato del email no es válido")]
+        [EmailAddress(ErrorMessage = "El formato del email no es vï¿½lido")]
         public string Email { get; set; }
 
         public string? Telefono { get; set; }

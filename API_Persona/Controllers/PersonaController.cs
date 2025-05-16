@@ -2,14 +2,15 @@ using API_Persona.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API_Persona.Data;
-using API_Persona.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+//using API_Persona.Models;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
 
 namespace API_Persona.Controllers
 {
+    //Endpoints de Persona CRUD
     [Route("api/[controller]")]
     [ApiController]
     public class PersonasController : ControllerBase
@@ -24,6 +25,7 @@ namespace API_Persona.Controllers
         }
 
         // GET: api/Personas
+        // Con este Endpoint se obtienen todas las personas en la base de datos.
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Persona>>> GetPersonas()
@@ -33,6 +35,7 @@ namespace API_Persona.Controllers
         }
 
         // GET: api/Personas/5
+        // Con este Endpoint se obtienen las personas mediante su id en la base de datos.
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -45,13 +48,16 @@ namespace API_Persona.Controllers
             if (persona == null)
             {
                 _logger.LogWarning("Persona con ID: {Id} no encontrada", id);
-                return NotFound(new { message = $"No se encontró ninguna persona con el ID: {id}" });
+                return NotFound(new { 
+                    message = $"No se encontrï¿½ ninguna persona con el ID: {id}" });
             }
 
             return Ok(persona);
         }
 
-        // GET: api/Personas/buscar?nombre=Juan&apellido=Perez&email=juan@example.com
+        // GET: api/Personas/buscar
+        // Con este Endpoint se obtienen todas las personas en la base de datos en la coincidan 
+        // o se asemejen los datos de nombre , apellido y email, se pueden buscar cada uno solo o en conjunto.
         [HttpGet("buscar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -60,13 +66,14 @@ namespace API_Persona.Controllers
             [FromQuery] string? apellido = null,
             [FromQuery] string? email = null)
         {
-            // Validar que al menos un parámetro de búsqueda fue proporcionado
+            // Validar que al menos un parï¿½metro de bï¿½squeda fue proporcionado
             if (string.IsNullOrWhiteSpace(nombre) &&
                 string.IsNullOrWhiteSpace(apellido) &&
                 string.IsNullOrWhiteSpace(email))
             {
-                _logger.LogWarning("Intento de búsqueda sin proporcionar criterios");
-                return BadRequest(new { message = "Debe proporcionar al menos un criterio de búsqueda (nombre, apellido o email)" });
+                _logger.LogWarning("Intento de bï¿½squeda sin proporcionar criterios");
+                return BadRequest(new { 
+                    message = "Debe proporcionar al menos un criterio de bï¿½squeda (nombre, apellido o email)" });
             }
 
             _logger.LogInformation("Buscando personas con filtros - Nombre: {Nombre}, Apellido: {Apellido}, Email: {Email}",
@@ -74,12 +81,12 @@ namespace API_Persona.Controllers
                 apellido ?? "no especificado",
                 email ?? "no especificado");
 
-            // Construir la consulta de forma dinámica
+            // Construir la consulta de forma dinamica
             IQueryable<Persona> query = _context.Personas;
 
             if (!string.IsNullOrWhiteSpace(nombre))
             {
-                // Búsqueda insensible a mayúsculas/minúsculas con LIKE
+                // Busqueda insensible a mayusculas/minusculas con LIKE
                 query = query.Where(p => EF.Functions.ILike(p.Nombre, $"%{nombre}%"));
             }
 
@@ -96,12 +103,13 @@ namespace API_Persona.Controllers
             // Ejecutar la consulta y obtener los resultados
             var personas = await query.ToListAsync();
 
-            _logger.LogInformation("Se encontraron {Count} personas que coinciden con los criterios de búsqueda", personas.Count);
+            _logger.LogInformation("Se encontraron {Count} personas que coinciden con los criterios de bï¿½squeda", personas.Count);
 
             return Ok(personas);
         }
 
         // POST: api/Personas
+        // Con este Endpoint se agregan personas en la base de datos.
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -123,11 +131,13 @@ namespace API_Persona.Controllers
             catch (DbUpdateException ex)
             {
                 _logger.LogError(ex, "Error al crear la persona");
-                return BadRequest(new { message = "Error al crear la persona", error = ex.InnerException?.Message ?? ex.Message });
+                return BadRequest(new { 
+                    message = "Error al crear la persona", error = ex.InnerException?.Message ?? ex.Message });
             }
         }
 
-        // PUT: api/Personas/5
+        // PUT: api/Personas/id
+        // Con este Endpoint se modifican los datos de las personas en la base de datos.
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -140,18 +150,18 @@ namespace API_Persona.Controllers
                 return BadRequest(new { message = "El ID proporcionado en la URL no coincide con el ID del objeto" });
             }
 
-            // Buscar la persona para preservar FechaRegistro
+            // Busca la persona para preservar FechaRegistro
             var existingPersona = await _context.Personas.FindAsync(id);
             if (existingPersona == null)
             {
                 _logger.LogWarning("Intento de actualizar una persona inexistente con ID: {Id}", id);
-                return NotFound(new { message = $"No se encontró ninguna persona con el ID: {id}" });
+                return NotFound(new { message = $"No se encontrï¿½ ninguna persona con el ID: {id}" });
             }
 
-            // Preservar la fecha de registro original
+            // Preserva la fecha de registro original
             persona.FechaRegistro = existingPersona.FechaRegistro;
 
-            // Desconectar la entidad existente
+            // Desconecta la entidad existente
             _context.Entry(existingPersona).State = EntityState.Detached;
 
             _context.Entry(persona).State = EntityState.Modified;
@@ -165,8 +175,8 @@ namespace API_Persona.Controllers
             {
                 if (!PersonaExists(id))
                 {
-                    _logger.LogWarning("Persona con ID: {Id} no encontrada durante la actualización", id);
-                    return NotFound(new { message = $"No se encontró ninguna persona con el ID: {id}" });
+                    _logger.LogWarning("Persona con ID: {Id} no encontrada durante la actualizaciï¿½n", id);
+                    return NotFound(new { message = $"No se encontrï¿½ ninguna persona con el ID: {id}" });
                 }
                 else
                 {
@@ -185,6 +195,7 @@ namespace API_Persona.Controllers
         }
 
         // DELETE: api/Personas/5
+        //Con este endpoint se eliminan los datos de la persona por su id.
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -194,7 +205,8 @@ namespace API_Persona.Controllers
             if (persona == null)
             {
                 _logger.LogWarning("Intento de eliminar una persona inexistente con ID: {Id}", id);
-                return NotFound(new { message = $"No se encontró ninguna persona con el ID: {id}" });
+                return NotFound(new { 
+                    message = $"No se encontrï¿½ ninguna persona con el ID: {id}" });
             }
 
             try
@@ -207,7 +219,8 @@ namespace API_Persona.Controllers
             {
                 _logger.LogError(ex, "Error al eliminar persona con ID: {Id}", id);
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new { message = "Error al eliminar la persona", error = ex.InnerException?.Message ?? ex.Message });
+                    new { 
+                        message = "Error al eliminar la persona", error = ex.InnerException?.Message ?? ex.Message });
             }
 
             return NoContent();
