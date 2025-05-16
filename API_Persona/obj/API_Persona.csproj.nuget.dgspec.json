@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jurge_6mghjsd\\source\\repos\\API_Persona\\API_Persona\\API_Persona.csproj": {}
+    "C:\\Users\\jurge_6mghjsd\\OneDrive\\Documents\\GitHub\\API_Persona\\API_Persona\\API_Persona.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jurge_6mghjsd\\source\\repos\\API_Persona\\API_Persona\\API_Persona.csproj": {
+    "C:\\Users\\jurge_6mghjsd\\OneDrive\\Documents\\GitHub\\API_Persona\\API_Persona\\API_Persona.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jurge_6mghjsd\\source\\repos\\API_Persona\\API_Persona\\API_Persona.csproj",
+        "projectUniqueName": "C:\\Users\\jurge_6mghjsd\\OneDrive\\Documents\\GitHub\\API_Persona\\API_Persona\\API_Persona.csproj",
         "projectName": "API_Persona",
-        "projectPath": "C:\\Users\\jurge_6mghjsd\\source\\repos\\API_Persona\\API_Persona\\API_Persona.csproj",
+        "projectPath": "C:\\Users\\jurge_6mghjsd\\OneDrive\\Documents\\GitHub\\API_Persona\\API_Persona\\API_Persona.csproj",
         "packagesPath": "C:\\Users\\jurge_6mghjsd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jurge_6mghjsd\\source\\repos\\API_Persona\\API_Persona\\obj\\",
+        "outputPath": "C:\\Users\\jurge_6mghjsd\\OneDrive\\Documents\\GitHub\\API_Persona\\API_Persona\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,22 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
