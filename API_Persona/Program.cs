@@ -13,7 +13,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
+builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") // Tu app de Angular
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // Si necesitas enviar cookies/auth
+    });
+});
+
 var app = builder.Build();
+// Usar CORS ANTES de otros middlewares
+app.UseCors("AllowAngularApp");
+
 
 //Configuracion del Http
 if (app.Environment.IsDevelopment())

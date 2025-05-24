@@ -163,3 +163,9 @@ C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Deb
 C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\System.Web.Cors.dll
+C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\System.Net.Http.Formatting.dll
+C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\System.Web.Http.dll
+C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\System.Web.Http.Cors.dll
+C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\jurge_6mghjsd\OneDrive\Documents\GitHub\API_Persona\API_Persona\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

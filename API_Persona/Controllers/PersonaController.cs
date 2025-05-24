@@ -2,6 +2,7 @@ using API_Persona.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API_Persona.Data;
+using System.Web.Http.Cors;
 //using API_Persona.Models;
 //using System;
 //using System.Collections.Generic;
@@ -11,6 +12,7 @@ using API_Persona.Data;
 namespace API_Persona.Controllers
 {
     //Endpoints de Persona CRUD
+    [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"*")]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonasController : ControllerBase
